@@ -25,7 +25,7 @@ class ClockIn(object):
     """
     LOGIN_URL = "https://zjuam.zju.edu.cn/cas/login?service=https%3A%2F%2Fhealthreport.zju.edu.cn%2Fa_zju%2Fapi%2Fsso%2Findex%3Fredirect%3Dhttps%253A%252F%252Fhealthreport.zju.edu.cn%252Fncov%252Fwap%252Fdefault%252Findex"
     BASE_URL = "https://healthreport.zju.edu.cn/ncov/wap/default/index"
-    SAVE_URL = "https://healthreport.zju.edu.cn/ncov/wap/default/save"
+    #SAVE_URL = "https://healthreport.zju.edu.cn/ncov/wap/default/save"
     CAPTCHA_URL = 'https://healthreport.zju.edu.cn/ncov/wap/default/code'
     HEADERS = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36"
@@ -73,9 +73,9 @@ class ClockIn(object):
 
     def get_captcha(self):
         """Get CAPTCHA code"""
-        cookie_dict = {'eai-sess': self.eai_sess}
-        self.sess.cookies = requests.cookies.cookiejar_from_dict(cookie_dict)
-        resp = self.sess.get(self.CAPTCHA_URL)
+        #cookie_dict = {'eai-sess': self.eai_sess}
+        #self.sess.cookies = requests.cookies.cookiejar_from_dict(cookie_dict)
+        #resp = self.sess.get(self.CAPTCHA_URL)
         captcha = self.ocr.classification(resp.content)
         print("验证码：", captcha)
         return captcha
@@ -118,7 +118,7 @@ class ClockIn(object):
         new_info['sfsqhzjkk'] = 1   # 是否申领杭州健康码
         new_info['sqhzjkkys'] = 1   # 杭州健康吗颜色，1:绿色 2:红色 3:黄色
         new_info['sfqrxxss'] = 1    # 是否确认信息属实
-        new_info['jcqzrq'] = ""
+        #new_info['jcqzrq'] = ""
         new_info['gwszdd'] = ""
         new_info['szgjcs'] = ""
         new_info['verifyCode'] = self.get_captcha()
